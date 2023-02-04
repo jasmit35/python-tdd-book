@@ -1,5 +1,6 @@
 from selenium import webdriver
-import unittest
+from selenium.webdriver.common.keys import Keys, time, unittest
+
 
 class NewVisitorTest(unittest.TestCase):
 
@@ -14,6 +15,6 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('To-Do', self.browser.title)
         self.fail('Finish the test!')
 
+
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
-
