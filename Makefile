@@ -1,12 +1,12 @@
 #
-runserver:
+run-server:
 	python manage.py runserver &
 	ps -ef|grep runserver
 #
-unit-test:
+unit-tests:
 	python manage.py test
 #
-functional-test:
+functional-tests:
 	python functional_tests.py
 
 
