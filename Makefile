@@ -8,5 +8,8 @@ unit-tests:
 #
 functional-tests:
 	python functional_tests.py
+#
+migrations:
+	python manage.py makemigrations 
 
 
