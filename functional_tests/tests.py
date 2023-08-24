@@ -60,8 +60,6 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
 
-        self.fail('Finish the test')
-
 
 '''
 def test_can_start_a_list_and_retrive_it_later(self):
