@@ -33,6 +33,13 @@ class ListViewTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
+    def test_passes_corrret_list_to_template(self):
+        other_list = List.objects.create()
+        correct_list = List.objects.create()
+
+        response = self.client.get(f'/lists/{correct_list.id}/')
+        self.assertEqual(response.context['list'], correct_list)
+
 
 class ListAndItemModelsTest(TestCase):
 
@@ -86,16 +93,18 @@ class NewItemTest(TestCase):
                                     data={'item text': 'a new item for an exting list'})
         self.assertRedirects(response, f'/lists/{correct_list.id}/')
 
-# class ListAndItemModelsTest(TestVase)
-#     def test_only_saves_items_when_necessary(self):
-#         self.client.get('/')
-#         self.assertEqual(Item.objects.count(), 0)
-#
-#     def test_displays_all_list_items(self):
-#         Item.objects.create(text='itemey 1')
-#         Item.objects.create(text='itemey 2')
-#
+    def test_displays_all_list_items(self):
+        list_ = List.objects.create()
+
+        Item.objects.create(text='itemey 1', list=list_)
+        Item.objects.create(text='itemey 2', list=list_)
+
 #         response = self.client.get('/')
 #
 #         self.assertIn('itemey 1', response.content.decode())
 #         self.assertIn('itemey 2', response.content.decode())
+
+# class ListAndItemModelsTest(TestVase)
+#     def test_only_saves_items_when_necessary(self):
+#         self.client.get('/')
+#         self.assertEqual(Item.objects.count(), 0)
