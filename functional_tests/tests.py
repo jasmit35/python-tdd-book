@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
@@ -9,7 +9,7 @@ import time
 MAX_WAIT = 10
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -39,7 +39,6 @@ class NewVisitorTest(LiveServerTestCase):
 
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
-        self.browser.quit
 
         self.browser = webdriver.Firefox()
         self.browser.get(self.live_server_url)
@@ -68,6 +67,7 @@ class NewVisitorTest(LiveServerTestCase):
         # She notices the input box is nicely centered
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
         self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)
+        self.browser.quit
 
 
 '''
